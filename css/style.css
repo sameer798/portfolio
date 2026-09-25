@@ -1,0 +1,653 @@
+/* ===== Reset & base ===== */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  --bg-dark: #0a0a10;
+  --bg-card: #2F2F2F;
+  --bg-gradient-start: #1a1a2e;
+  --bg-gradient-end: #16213e;
+  --text-main: #f0f0f5;
+  --text-muted: #8888aa;
+  --accent-green: #5dcaa5;
+  --accent-blue: #378ADD;
+  --border-color: #2b2b3d;
+
+  --input-bg: #ffffff;
+  --input-text: #111111;
+
+  /* Fixed "code card" look - intentionally the SAME in light and dark
+     theme (matches the reference design). --bg-card above is also
+     never redefined in the [data-theme="light"] block, so it too
+     stays fixed. */
+  --card-border: #454545;
+  --card-text: #f0f0f5;
+  --card-text-muted: #8888aa;
+  --card-accent-green: #5dcaa5;
+  --card-accent-blue: #378ADD;
+  --code-keyword: #ed93b1;
+  --code-var: #85B7EB;
+  --code-string: #FAC775;
+}
+
+/* ===== Light theme overrides =====
+   Only page-level chrome (page bg, hero gradient, nav text, inputs)
+   changes here. The --card-* and --code-* variables above are
+   intentionally NOT redefined, so every card keeps its dark look
+   regardless of theme. */
+:root[data-theme="light"] {
+  --bg-dark: #f4f4f9;
+  --bg-gradient-start: #eef1fb;
+  --bg-gradient-end: #f7eefb;
+  --text-main: #1c1c26;
+  --text-muted: #5a5a70;
+  --accent-green: #1f8f6d;
+  --accent-blue: #1f6fb8;
+  --border-color: #dcdce6;
+
+  --input-bg: #ffffff;
+  --input-text: #111111;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: 'Segoe UI', Roboto, Arial, sans-serif;
+  background: var(--bg-dark);
+  color: var(--text-main);
+  line-height: 1.6;
+  padding-top: 68px;   /* 👈 navbar ki height ke barabar */
+  transition: background-color 0.4s ease, color 0.4s ease;
+}
+
+/* Smooth theme switch for ALL major surfaces */
+#navbar,
+#about,
+#experience,
+#skills,
+#projects,
+#education,
+#contact,
+#site-footer,
+.skill-card,
+.tool-chip,
+.stack-card,
+.education-card,
+.contact-form,
+.code-card,
+.section-title.lined,
+.section-title.boxed .boxed-text {
+  transition: background-color 0.4s ease,
+    color 0.4s ease,
+    border-color 0.4s ease,
+    box-shadow 0.3s ease,
+    transform 0.25s ease;
+}
+
+/* Offsets the scroll target so the sticky navbar doesn't cover the section title */
+section[id] {
+  scroll-margin-top: 90px;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+section {
+  padding: 80px 4%;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+/* ===== Navbar ===== */
+#navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  width: 100%;
+  z-index: 100;
+  background: var(--bg-dark);
+  border-bottom: 1px solid var(--border-color);
+  padding: 16px 0;                          /* 👈 horizontal padding hata di */
+  transition: background-color 0.4s ease,
+              border-color 0.4s ease,
+              box-shadow 0.3s ease;
+}
+
+#navbar.scrolled {
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.25);
+}
+
+/* Navbar ke andar ka content centered container mein */
+.navbar-inner {
+  max-width: 1400px;                         /* 👈 sections ke saath match */
+  margin: 0 auto;
+  padding: 0 4%;                             /* 👈 yahan padding lagayi */
+  display: flex;
+  align-items: center;
+  justify-content: space-between;            /* 👈 logo/list left, toggle right */
+}
+
+
+.nav-list {
+  list-style: none;
+  display: flex;
+  gap: 28px;
+  flex-wrap: wrap;
+}
+
+.nav-list a {
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  color: var(--text-main);
+  transition: color 0.2s;
+  padding-bottom: 4px;
+  border-bottom: 2px solid transparent;
+}
+
+.nav-list a:hover {
+  color: var(--accent-green);
+}
+
+.nav-list a.active {
+  color: var(--accent-green);
+  border-bottom-color: var(--accent-green);
+}
+
+/* Hamburger - hidden on desktop, shown on mobile via responsive.css */
+.hamburger {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 4px;
+}
+
+.hamburger span {
+  width: 22px;
+  height: 2px;
+  background: var(--text-main);
+  transition: transform 0.2s, opacity 0.2s;
+}
+
+.hamburger.active span:nth-child(1) {
+  transform: translateY(7px) rotate(45deg);
+}
+
+.hamburger.active span:nth-child(2) {
+  opacity: 0;
+}
+
+.hamburger.active span:nth-child(3) {
+  transform: translateY(-7px) rotate(-45deg);
+}
+
+/* ===== Theme toggle ===== */
+.theme-toggle {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: var(--bg-card);
+  border: 1px solid var(--card-border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  color: var(--card-text);
+  flex-shrink: 0;
+  transition: transform 0.3s ease,
+              box-shadow 0.3s ease,
+              background 0.3s ease;
+}
+
+.theme-toggle:hover {
+  transform: rotate(20deg) scale(1.1);
+  box-shadow: 0 6px 18px rgba(120, 100, 220, 0.4);
+  background: var(--accent-blue);
+  color: #fff;
+  border-color: var(--accent-blue);
+}
+
+.theme-toggle svg {
+  width: 16px;
+  height: 16px;
+}
+
+.theme-toggle .icon-sun {
+  display: flex;
+}
+
+.theme-toggle .icon-moon {
+  display: none;
+}
+
+:root[data-theme="light"] .theme-toggle .icon-sun {
+  display: none;
+}
+
+:root[data-theme="light"] .theme-toggle .icon-moon {
+  display: flex;
+}
+
+/* ===== About section ===== */
+#about {
+  background: linear-gradient(135deg, var(--bg-gradient-start), var(--bg-gradient-end));
+}
+
+.about-wrapper {
+  display: flex;
+  gap: 40px;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.about-text {
+  flex: 1;
+  min-width: 280px;
+}
+
+.hey-there,
+.hero-line {
+  font-size: 32px;
+  font-weight: 600;
+}
+
+.accent {
+  color: var(--accent-green);
+}
+
+.social-icons {
+  display: flex;
+  gap: 12px;
+  margin: 20px 0;
+}
+
+.social-icon {
+  width: 36px;
+  height: 36px;
+  border-radius: 8px;
+  background: var(--bg-card);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--card-text);
+  transition: background 0.25s ease,
+    color 0.25s ease,
+    transform 0.25s ease,
+    box-shadow 0.3s ease;
+}
+
+.social-icon svg {
+  width: 17px;
+  height: 17px;
+}
+
+.social-icon:hover {
+  background: var(--accent-blue);
+  color: #fff;
+  transform: translateY(-3px) scale(1.08);
+  box-shadow: 0 6px 16px rgba(55, 138, 221, 0.4);
+}
+
+.about-buttons {
+  display: flex;
+  gap: 14px;
+  margin-top: 10px;
+}
+
+.btn {
+  padding: 12px 22px;
+  border-radius: 8px;
+  font-size: 13px;
+  font-weight: 600;
+  display: inline-block;
+  border: none;
+  cursor: pointer;
+  position: relative;
+  transition: transform 0.25s ease,
+    box-shadow 0.3s ease,
+    background 0.25s ease;
+}
+
+.btn-primary {
+  background: var(--accent-blue);
+  color: #fff;
+}
+
+.btn-primary:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 20px rgba(55, 138, 221, 0.45);
+  filter: brightness(1.08);
+}
+
+.btn-secondary {
+  background: #1D9E75;
+  color: #fff;
+}
+
+.btn-secondary:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 20px rgba(29, 158, 117, 0.45);
+  filter: brightness(1.08);
+}
+
+.btn:active {
+  transform: translateY(-1px);
+}
+
+.code-card {
+  flex: 1;
+  min-width: 280px;
+  background: var(--bg-card);
+  border: 1px solid var(--card-border);
+  color: var(--card-text);
+  border-radius: 10px;
+  padding: 18px 20px;
+}
+
+.window-dots {
+  display: flex;
+  gap: 6px;
+  margin-bottom: 12px;
+}
+
+.dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+}
+
+.dot.red {
+  background: #E24B4A;
+}
+
+.dot.yellow {
+  background: #EF9F27;
+}
+
+.dot.green {
+  background: #639922;
+}
+
+.code-block {
+  font-family: 'Courier New', monospace;
+  font-size: 13px;
+  line-height: 1.8;
+  color: var(--card-text-muted);
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+
+.code-keyword {
+  color: var(--code-keyword);
+}
+
+.code-var {
+  color: var(--code-var);
+}
+
+.code-string {
+  color: var(--code-string);
+}
+
+.code-bool {
+  color: var(--code-string);
+}
+
+.code-desc {
+  color: var(--card-accent-green);
+}
+
+.who-am-i {
+  margin-top: 50px;
+  display: flex;
+  gap: 40px;
+  align-items: flex-start;
+  flex-wrap: wrap;
+}
+
+.who-am-i-text {
+  flex: 1;
+  min-width: 280px;
+}
+
+.who-am-i-photo {
+  flex: 0 0 280px;
+  display: flex;
+  justify-content: center;
+}
+
+.who-am-i-photo img {
+  width: 280px;
+  height: 340px;
+  object-fit: cover;
+  border-radius: 12px;
+  box-shadow: 0 12px 40px rgba(120, 100, 220, 0.3);
+  border: 1px solid var(--card-border);
+  transition: transform 0.4s ease, box-shadow 0.4s ease;
+}
+
+.who-am-i-photo img:hover {
+  transform: translateY(-6px) scale(1.02);
+  box-shadow: 0 20px 55px rgba(120, 100, 220, 0.5);
+}
+
+.who-am-i h3 {
+  color: var(--accent-green);
+  margin-bottom: 14px;
+}
+
+.who-am-i p {
+  margin-bottom: 14px;
+  color: var(--text-muted);
+  max-width: 700px;
+}
+
+/* ===== Section titles ===== */
+.section-title {
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+/* Wrapper handles sticky + z-index (so it stays BEHIND the stack cards) */
+.section-title-wrap {
+  position: sticky;
+  top: 90px;
+  z-index: 5;              /* 👈 cards (z-index: 20) se NEECHE */
+  margin-bottom: 40px;
+}
+
+.section-title.boxed {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  max-width: 100%;         /* 👈 FULL page width (matlab section ki poori width) */
+  margin: 0;
+  text-align: left;
+  pointer-events: none;    /* text pe hi click ho, wrapper pe nahi */
+}
+
+.section-title.boxed .boxed-text {
+  background: var(--bg-card);
+  border: 1px solid var(--card-border);
+  color: var(--card-text);
+  padding: 10px 22px;
+  border-radius: 6px;
+  letter-spacing: 1px;
+  white-space: nowrap;
+  pointer-events: auto;
+  position: relative;
+  z-index: 2;              /* boxed-text apne wrapper ke andar upar */
+}
+
+/* Line ko transparent rakho taaki cards ke peeche se visible ho */
+.section-title.boxed .title-line {
+  background: var(--border-color);
+  opacity: 0.8;
+}
+
+.title-row {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  max-width: 700px;
+  margin: 0 auto 40px;
+}
+
+.title-line {
+  flex: 1;
+  height: 1px;
+  background: var(--border-color);
+}
+
+.section-title.lined {
+  background: var(--bg-card);
+  border: 1px solid var(--card-border);
+  color: var(--card-text);
+  padding: 10px 24px;
+  border-radius: 8px;
+  font-size: 16px;
+  white-space: nowrap;
+}
+
+.tools-title {
+  text-align: center;
+  color: #D85A30;
+  margin: 30px 0 20px;
+}
+
+/* ===== Education ===== */
+.education-list {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  max-width: 700px;
+  margin: 0 auto;
+}
+
+.education-card {
+  background: var(--bg-card);
+  border: 1px solid var(--card-border);
+  color: var(--card-text);
+  border-radius: 10px;
+  padding: 20px 24px;
+  position: relative;
+  transition: transform 0.25s ease,
+    box-shadow 0.3s ease,
+    border-color 0.3s ease;
+}
+
+.education-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 32px rgba(120, 100, 220, 0.3);
+  border-color: var(--card-accent-green);
+}
+
+.edu-years {
+  color: var(--card-text-muted);
+  font-size: 13px;
+}
+
+.edu-degree {
+  color: var(--card-accent-green);
+  font-weight: 700;
+  margin: 8px 0 4px;
+}
+
+.edu-logo {
+  position: absolute;
+  right: 20px;
+  top: 20px;
+  width: 50px;
+  height: 50px;
+  object-fit: contain;
+  border-radius: 6px;
+}
+
+/* ===== Contact ===== */
+.contact-wrapper {
+  display: flex;
+  gap: 40px;
+  flex-wrap: wrap;
+}
+
+.contact-form {
+  flex: 1;
+  min-width: 280px;
+  background: var(--bg-card);
+  border: 1px solid var(--card-border);
+  color: var(--card-text);
+  padding: 24px;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.contact-form label {
+  font-size: 13px;
+  margin-top: 10px;
+}
+
+.contact-form input,
+.contact-form textarea {
+  padding: 10px 12px;
+  border-radius: 6px;
+  border: 1px solid var(--card-border);
+  background: var(--input-bg);
+  color: var(--input-text);
+}
+
+.contact-form button {
+  margin-top: 16px;
+  align-self: flex-start;
+}
+
+.form-status {
+  font-size: 13px;
+  color: var(--card-accent-green);
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.form-status.show {
+  opacity: 1;
+}
+
+.contact-info {
+  flex: 1;
+  min-width: 240px;
+}
+
+.contact-info p {
+  margin-bottom: 14px;
+  color: var(--accent-green);
+}
+
+/* ===== Footer ===== */
+#site-footer {
+  border-top: 1px solid var(--border-color);
+  padding: 24px 8%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 14px;
+  font-size: 13px;
+  color: var(--text-muted);
+}
+
+.footer-socials {
+  display: flex;
+  gap: 10px;
+}

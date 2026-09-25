@@ -1,0 +1,157 @@
+/* ===== Tablet (max 992px) ===== */
+@media (max-width: 992px) {
+  section {
+    padding: 50px 6%;
+  }
+
+  .about-wrapper {
+    flex-direction: column;
+  }
+
+  .hey-there,
+  .hero-line {
+    font-size: 26px;
+  }
+}
+
+/* ===== Mobile (max 768px) ===== */
+@media (max-width: 768px) {
+   #navbar {
+    padding: 14px 0;
+  }
+
+  .navbar-inner {
+    padding: 0 5%;
+  }
+
+  body {
+    padding-top: 62px;
+  }
+
+  section[id] {
+    scroll-margin-top: 80px;
+  }
+
+  .navbar-inner {
+    justify-content: space-between;
+  }
+
+  .hamburger {
+    display: flex;
+  }
+
+   .nav-list {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background: var(--bg-dark);
+    border-bottom: 1px solid var(--border-color);
+    flex-direction: column;
+    flex-wrap: nowrap;      /* 👈 IMPORTANT: rows ko wrap hone se rokta hai */
+    gap: 0;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease;
+    width: 100%;
+  }
+
+  .nav-list li {
+    width: 100%;            /* 👈 IMPORTANT: har item full width */
+    list-style: none;
+  }
+
+  .nav-list.open {
+    max-height: 320px;
+  }
+
+  .who-am-i {
+    flex-direction: column;
+  }
+
+  .who-am-i-photo {
+    flex: 0 0 auto;
+    width: 100%;
+  }
+
+  .who-am-i-photo img {
+    width: 100%;
+    max-width: 320px;
+    height: auto;
+    aspect-ratio: 4 / 5;
+  }
+
+
+
+  .nav-list a {
+     font-size: 13px;
+    display: block;
+    padding: 14px 0;
+    border-bottom: none;
+    width: 100%;
+  }
+
+    .nav-list a.active {
+    color: var(--accent-green);
+    border-left: 3px solid var(--accent-green);
+    padding-left: 12px;
+  }
+
+  section {
+    padding: 40px 5%;
+  }
+
+  .hey-there,
+  .hero-line {
+    font-size: 22px;
+  }
+
+  .skills-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .stack-card {
+    padding: 16px 18px;
+  }
+
+  .code-block {
+    font-size: 12px;
+  }
+
+  .contact-wrapper {
+    flex-direction: column;
+  }
+
+  .slider-image {
+    height: 220px;
+  }
+}
+
+/* ===== Small mobile (max 480px) ===== */
+@media (max-width: 480px) {
+  .hey-there,
+  .hero-line {
+    font-size: 19px;
+  }
+
+  .about-buttons {
+    flex-direction: column;
+  }
+
+  .btn {
+    text-align: center;
+  }
+
+  .tool-chip {
+    padding: 10px 16px;
+    font-size: 12px;
+  }
+
+  .stack-card-header {
+    flex-wrap: wrap;
+  }
+
+  .view-photos-btn {
+    margin-left: auto;
+  }
+}

@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sameer - Software Engineer</title>
+
+  <script>
+    // Runs before CSS paints, so the correct theme applies immediately
+    // (avoids a flash of the wrong theme on page load).
+    (function () {
+      const saved = localStorage.getItem("theme");
+      const systemPrefersLight = window.matchMedia("(prefers-color-scheme: light)").matches;
+      document.documentElement.setAttribute("data-theme", saved || (systemPrefersLight ? "light" : "dark"));
+    })();
+  </script>
+
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="css/components.css" />
+  <link rel="stylesheet" href="css/responsive.css" />
+</head>
+<body>
+
+  <!-- Navbar -->
+  <nav id="navbar"></nav>
+
+  <!-- About Section -->
+  <section id="about"></section>
+
+  <!-- Experience Section -->
+  <section id="experience"></section>
+
+  <!-- Skills Section -->
+  <section id="skills"></section>
+
+  <!-- Projects Section -->
+  <section id="projects"></section>
+
+  <!-- Education Section -->
+  <section id="education"></section>
+
+  <!-- Contact Section -->
+  <section id="contact"></section>
+
+  <!-- Footer -->
+  <footer id="site-footer"></footer>
+
+  <!-- Scripts -->
+  <script src="js/data.js"></script>
+  <script src="js/render.js"></script>
+  <script src="js/slider.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>
