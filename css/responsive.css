@@ -4,13 +4,15 @@
     padding: 50px 6%;
   }
 
-  .about-wrapper {
+  .about-hero,
+  .about-who {
     flex-direction: column;
+    gap: 30px;
   }
 
   .hey-there,
   .hero-line {
-    font-size: 26px;
+    font-size: 34px;
   }
 }
 
@@ -65,7 +67,7 @@
     max-height: 320px;
   }
 
-  .who-am-i {
+    .about-who {
     flex-direction: column;
   }
 
@@ -103,7 +105,7 @@
 
   .hey-there,
   .hero-line {
-    font-size: 22px;
+    font-size: 28px;
   }
 
   .skills-grid {
@@ -131,7 +133,7 @@
 @media (max-width: 480px) {
   .hey-there,
   .hero-line {
-    font-size: 19px;
+    font-size: 24px;
   }
 
   .about-buttons {

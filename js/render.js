@@ -65,13 +65,59 @@ function renderNavbar() {
   `;
 }
 
+
+// Builds the code card body HTML from about.codeCard data
+// Supports: string, array, bool, function (with conditions) types
+function buildCodeCard(about) {
+  const card = about.codeCard;
+  if (!card || !card.fields) return "";
+
+  const lines = card.fields.map(field => {
+    const key = `<span class="code-var">${field.key}</span>`;
+
+    switch (field.type) {
+      case "string":
+        return `  ${key}: <span class="code-string">'${field.value}'</span>`;
+
+      case "array":
+        return `  ${key}: [${field.value.map(v => `<span class="code-string">'${v}'</span>`).join(", ")}]`;
+
+      case "bool":
+        return `  ${key}: <span class="code-bool">${field.value}</span>`;
+
+           case "function": {
+        const body = (field.conditions || []).map((cond) => {
+          // 👇 sirf "this." ko blue karo, uske baad jo bhi hai normal rahe
+          // Example: "this.hardWorker" → <blue>this.</blue>hardWorker
+          const prefixHtml = cond.prefix.replace(
+            /this\./g,
+            `<span class="code-var">this.</span>`
+          );
+          const opHtml = cond.op ? ` ${cond.op}` : "";
+          const valHtml = cond.value !== undefined ? ` ${cond.value}` : "";
+          return `      ${prefixHtml}${opHtml}${valHtml}`;
+        }).join("\n");
+        return `  ${key}: <span class="code-keyword">function</span>() {\n    <span class="code-keyword">return</span> (\n${body}\n    );\n  }`;
+      }
+
+      default:
+        return `  ${key}: ${field.value}`;
+    }
+  }).join(",\n");
+
+  return `<span class="code-keyword">const</span> <span class="code-var">${card.varName}</span> = {\n${lines}\n};`;
+}
+
+
+
 function renderAbout() {
   const { about } = portfolioData;
   const section = document.getElementById("about");
 
   section.innerHTML = `
-    <div class="about-wrapper">
-            <div class="about-text">
+    <!-- Sub-section A: Hero text + Code card -->
+    <div class="about-hero">
+      <div class="about-text">
         <p class="hey-there">Hey there,</p>
         <p class="hero-line">
           I am <span class="accent name-flash" id="name-flash">${about.name}.</span>
@@ -92,20 +138,16 @@ function renderAbout() {
         </div>
       </div>
 
-            <div class="code-card">
+           <div class="code-card">
         <div class="code-card-header">
           <div class="window-dots"><span class="dot red"></span><span class="dot yellow"></span><span class="dot green"></span></div>
         </div>
-        <pre class="code-block"><span class="code-keyword">const</span> <span class="code-var">coder</span> = {
-  name: <span class="code-string">'${about.name}'</span>,
-  role: <span class="code-string">'${about.role}'</span>,
-  skills: [${portfolioData.skills.bars.map(s => `<span class="code-string">'${s.name}'</span>`).join(", ")}],
-  hireable: <span class="code-bool">true</span>
-};</pre>
+        <pre class="code-block">${buildCodeCard(about)}</pre>
       </div>
     </div>
 
-       <div class="who-am-i">
+    <!-- Sub-section B: Who am I + Photo -->
+    <div class="about-who">
       <div class="who-am-i-text">
         <h3>Who am I?</h3>
         ${about.bio.map(line => `<p>${line}</p>`).join("")}

@@ -244,11 +244,13 @@ section {
   background: linear-gradient(135deg, var(--bg-gradient-start), var(--bg-gradient-end));
 }
 
-.about-wrapper {
+/* 👇 Sub-section A: Hero text + Code card */
+.about-hero {
   display: flex;
-  gap: 40px;
+  gap: 50px;
   flex-wrap: wrap;
   align-items: center;
+  margin-bottom: 80px;       
 }
 
 .about-text {
@@ -258,8 +260,19 @@ section {
 
 .hey-there,
 .hero-line {
-  font-size: 32px;
-  font-weight: 600;
+  font-size: 42px;       
+  font-weight: 700;         
+  line-height: 1.25;        
+  letter-spacing: -0.5px;   
+}
+
+.hey-there {
+  font-weight: 600;         
+  margin-bottom: 4px;
+}
+
+.hero-line {
+  margin-bottom: 4px;
 }
 
 .accent {
@@ -441,39 +454,47 @@ section {
 }
 
 .code-block {
-  font-family: 'Courier New', monospace;
-  font-size: 13px;
-  line-height: 1.8;
-  color: var(--card-text-muted);
+  font-family: 'Consolas', 'Monaco', 'Courier New', monospace;  /* 👈 better fonts */
+  font-size: 13.5px;         /* 👈 13 → 13.5 */
+  font-weight: 500;          /* 👈 THODA BOLD */
+  line-height: 1.85;         /* 👈 breathing room */
+  color: var(--card-text);   /* 👈 muted → main (brighter) */
   white-space: pre-wrap;
   word-break: break-word;
+  letter-spacing: 0.2px;
 }
 
+/* 👇 Code ke andar keywords/values ko bhi bold karo */
 .code-keyword {
   color: var(--code-keyword);
+  font-weight: 600;
 }
 
 .code-var {
   color: var(--code-var);
+  font-weight: 600;
 }
 
 .code-string {
   color: var(--code-string);
+  font-weight: 500;
 }
 
 .code-bool {
   color: var(--code-string);
+  font-weight: 600;
 }
 
 .code-desc {
   color: var(--card-accent-green);
+  font-weight: 500;
 }
 
-.who-am-i {
-  margin-top: 50px;
+/* 👇 Sub-section B: Who am I + Photo */
+.about-who {
   display: flex;
-  gap: 40px;
-  align-items: flex-start;
+  gap: 50px;
+  align-items: center;         /* 👈 center align for symmetry */
   flex-wrap: wrap;
 }
 

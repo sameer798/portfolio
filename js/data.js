@@ -3,12 +3,11 @@
 
 const portfolioData = {
 
-   about: {
+  about: {
     name: "Sameer",
     role: "Software Engineer",
 
     // 👇 Typing animation config
-    // "I " prefix fix rahega, sirf ye words type/delete honge
     typingPrefix: "I ",
     typingWords: [
       "build reliable software.",
@@ -16,21 +15,64 @@ const portfolioData = {
       "write clean code.",
       "ship scalable systems."
     ],
-    typingSpeed: 100,         // ms per letter (type karte waqt)
-    typingDeleteSpeed: 50,    // ms per letter (delete karte waqt)
-    typingHoldTime: 1500,     // ms (complete word kitni der dikhe)
+    typingSpeed: 100,
+    typingDeleteSpeed: 50,
+    typingHoldTime: 1500,
 
     // 👇 Naam ke color flash ke liye
     nameColors: [
-      "#5dcaa5",   // green
-      "#ed93b1",   // pink
-      "#378ADD",   // blue
-      "#FAC775"    // yellow
+      "#5dcaa5",
+      "#ed93b1",
+      "#378ADD",
+      "#FAC775"
     ],
+
+    // 👇 Code card ka pura data (100% data-driven)
+    // type: "string" | "array" | "bool" | "function"
+    codeCard: {
+      varName: "coder",
+      fields: [
+        {
+          key: "name",
+          type: "string",
+          value: "Sameer"
+        },
+        {
+          key: "skills",
+          type: "array",
+          value: ["React", "Node.js", "JavaScript", "Python", "MySQL", "AWS"]
+        },
+        {
+          key: "hardWorker",
+          type: "bool",
+          value: true
+        },
+        {
+          key: "quickLearner",
+          type: "bool",
+          value: true
+        },
+        {
+          key: "problemSolver",
+          type: "bool",
+          value: true
+        },
+        {
+          key: "hireable",
+          type: "function",
+          conditions: [
+            { prefix: "this.hardWorker", op: "&&" },
+            { prefix: "this.problemSolver", op: "&&" },
+            { prefix: "this.skills.length", op: ">=", value: 5 }
+          ]
+        }
+      ]
+    },
 
     bio: [
       "Hey there, I'm Sameer! I'm a Software Engineer passionate about building scalable systems and writing clean, maintainable code.",
-      "I love diving deep into problems, learning new tools, and shipping things that actually work in production."
+      "I love diving deep into problems, learning new tools, and shipping things that actually work in production.",
+      "Backend wizard here! 🚀 I'm all about making systems faster, smarter, and more scalable. Think database optimization, microservices that actually work, and code that doesn't make you want to pull your hair out. I've squeezed out 40% faster retrieval times and 35% speedier searches—because who likes waiting, right? When I'm not geeking out over clean code and new tech, you'll catch me crushing LeetCode problems (1730+ rating, no big deal 😎) or competing in programming contests. Always down to build something cool together!"
     ],
     photo: "assets/images/my-photo.png",
     socials: {
