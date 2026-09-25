@@ -147,9 +147,12 @@ function renderAbout() {
     </div>
 
     <!-- Sub-section B: Who am I + Photo -->
+       <!-- Sub-section B: Who am I + Photo -->
     <div class="about-who">
       <div class="who-am-i-text">
-        <h3>Who am I?</h3>
+        <h3 class="who-heading who-heading-flash" id="who-heading-flash">
+          ${(about.sectionHeading?.text || "Who am I?").toUpperCase()}
+        </h3>
         ${about.bio.map(line => `<p>${line}</p>`).join("")}
       </div>
       ${about.photo ? `
@@ -221,7 +224,7 @@ function renderExperience() {
   myRole: <span class="code-string">${job.role}</span>,
   duration: <span class="code-string">(${job.duration})</span>,
   tools: [${job.tools.map(t => `<span class="code-string">'${t}'</span>`).join(", ")}],
-  <span class="code-desc">Description: ${job.description}</span>
+  Description:<span class="code-var">${job.description}</span> 
 };</pre>
     `
   })).join("");
@@ -242,7 +245,7 @@ function renderProjects() {
       <pre class="code-block"><span class="code-keyword">const</span> <span class="code-var">project</span> = {
   name: <span class="code-string">'${proj.name}'</span>,
   tools: [${proj.tools.map(t => `<span class="code-string">'${t}'</span>`).join(", ")}],
-  <span class="code-desc">Description: ${proj.description}</span>
+   Description: <span class="code-var">${proj.description}</span> 
 };</pre>
     `
   })).join("");

@@ -27,6 +27,18 @@ const portfolioData = {
       "#FAC775"
     ],
 
+
+     // 👇 "Who am I?" section ki heading config
+    sectionHeading: {
+      text: "Who am I?",
+      colors: [
+        "#D4537E",   // pink (reference jaisa)
+        "#378ADD",   // blue
+        "#5dcaa5",   // green
+        "#EF9F27"    // amber
+      ]
+    },
+
     // 👇 Code card ka pura data (100% data-driven)
     // type: "string" | "array" | "bool" | "function"
     codeCard: {

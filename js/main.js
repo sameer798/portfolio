@@ -14,6 +14,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
      setupTypingAnimation();     
   setupNameColorFlash();      
+   setupWhoHeadingColorFlash();
 });
 
 // ---- Light/dark theme toggle (persisted in localStorage) ----
@@ -183,4 +184,24 @@ function setupNameColorFlash() {
     colorIndex = (colorIndex + 1) % colors.length;
     nameEl.style.setProperty("--name-color", colors[colorIndex]);
   }, 2500); // change every 2.5s (fade takes 1.2s, so plenty of time)
+}
+
+
+// ============================================================
+// Cycles the "WHO AM I?" heading color with a smooth fade
+// ============================================================
+function setupWhoHeadingColorFlash() {
+  const heading = document.getElementById("who-heading-flash");
+  if (!heading) return;
+
+  const colors = portfolioData.about.sectionHeading?.colors || [];
+  if (colors.length === 0) return;
+
+  let i = 0;
+  heading.style.setProperty("--heading-color", colors[0]);
+
+  setInterval(() => {
+    i = (i + 1) % colors.length;
+    heading.style.setProperty("--heading-color", colors[i]);
+  }, 2500); // every 2.5s (transition 1.2s hai, so smooth)
 }
