@@ -71,10 +71,14 @@ function renderAbout() {
 
   section.innerHTML = `
     <div class="about-wrapper">
-      <div class="about-text">
+            <div class="about-text">
         <p class="hey-there">Hey there,</p>
-        <p class="hero-line">I am <span class="accent">${about.name}.</span></p>
-        <p class="hero-line">${about.tagline1} <span class="accent">${about.tagline2}</span></p>
+        <p class="hero-line">
+          I am <span class="accent name-flash" id="name-flash">${about.name}.</span>
+        </p>
+        <p class="hero-line" id="typing-line">
+          <span class="typing-prefix">${about.typingPrefix || "I "}</span><span class="typing-word" id="typing-word"></span><span class="typing-cursor">|</span>
+        </p>
 
         <div class="social-icons">
           ${socialLink("linkedin", about.socials.linkedin)}
@@ -88,8 +92,10 @@ function renderAbout() {
         </div>
       </div>
 
-      <div class="code-card">
-        <div class="window-dots"><span class="dot red"></span><span class="dot yellow"></span><span class="dot green"></span></div>
+            <div class="code-card">
+        <div class="code-card-header">
+          <div class="window-dots"><span class="dot red"></span><span class="dot yellow"></span><span class="dot green"></span></div>
+        </div>
         <pre class="code-block"><span class="code-keyword">const</span> <span class="code-var">coder</span> = {
   name: <span class="code-string">'${about.name}'</span>,
   role: <span class="code-string">'${about.role}'</span>,

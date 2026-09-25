@@ -11,6 +11,9 @@ document.addEventListener("DOMContentLoaded", () => {
   setupContactForm();
   setupThemeToggle();
     setupNavbarScrollShadow();
+
+     setupTypingAnimation();     
+  setupNameColorFlash();      
 });
 
 // ---- Light/dark theme toggle (persisted in localStorage) ----
@@ -105,4 +108,79 @@ function setupNavbarScrollShadow() {
 
   window.addEventListener("scroll", toggleShadow, { passive: true });
   toggleShadow(); // run once on load
+}
+
+
+// ============================================================
+// Typing animation for the About section tagline
+// Prefix ("I ") stays fixed; only the word types/deletes in a loop
+// ============================================================
+function setupTypingAnimation() {
+  const wordEl = document.getElementById("typing-word");
+  if (!wordEl) return;
+
+  const words = portfolioData.about.typingWords || [];
+  if (words.length === 0) return;
+
+  const typeSpeed   = portfolioData.about.typingSpeed       || 100;
+  const deleteSpeed = portfolioData.about.typingDeleteSpeed || 50;
+  const holdTime    = portfolioData.about.typingHoldTime    || 1500;
+
+  let wordIndex = 0;
+  let charIndex = 0;
+  let isDeleting = false;
+
+  function tick() {
+    const currentWord = words[wordIndex];
+
+    if (!isDeleting) {
+      // typing forward
+      charIndex++;
+      wordEl.textContent = currentWord.substring(0, charIndex);
+
+      if (charIndex === currentWord.length) {
+        // word fully typed → hold, then start deleting
+        isDeleting = true;
+        setTimeout(tick, holdTime);
+        return;
+      }
+      setTimeout(tick, typeSpeed);
+    } else {
+      // deleting backward
+      charIndex--;
+      wordEl.textContent = currentWord.substring(0, charIndex);
+
+      if (charIndex === 0) {
+        // word fully deleted → move to next word, start typing
+        isDeleting = false;
+        wordIndex = (wordIndex + 1) % words.length;
+        setTimeout(tick, 300); // small pause before typing next
+        return;
+      }
+      setTimeout(tick, deleteSpeed);
+    }
+  }
+
+  // kick off
+  setTimeout(tick, 500);
+}
+
+// ============================================================
+// Cycles the name's color with a smooth fade (uses CSS variable
+// + transition, so the browser interpolates the color smoothly)
+// ============================================================
+function setupNameColorFlash() {
+  const nameEl = document.getElementById("name-flash");
+  if (!nameEl) return;
+
+  const colors = portfolioData.about.nameColors || [];
+  if (colors.length === 0) return;
+
+  let colorIndex = 0;
+  nameEl.style.setProperty("--name-color", colors[0]);
+
+  setInterval(() => {
+    colorIndex = (colorIndex + 1) % colors.length;
+    nameEl.style.setProperty("--name-color", colors[colorIndex]);
+  }, 2500); // change every 2.5s (fade takes 1.2s, so plenty of time)
 }

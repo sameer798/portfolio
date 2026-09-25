@@ -266,6 +266,33 @@ section {
   color: var(--accent-green);
 }
 
+/* 👇 Naam ka color smooth fade (JS changes CSS variable) */
+.name-flash {
+  color: var(--name-color, var(--accent-green));
+  transition: color 1.2s ease;   /* 👈 smooth 1.2s fade */
+}
+
+/* 👇 Typing cursor blink */
+.typing-cursor {
+  display: inline-block;
+  font-weight: 400;
+  margin-left: 2px;
+  color: var(--accent-green);
+  animation: blink 1s step-end infinite;
+}
+
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+
+/* 👇 Typing word — jaisa type ho raha hai */
+.typing-word {
+  color: var(--accent-green);
+  font-weight: 600;
+  display: inline;
+}
+
 .social-icons {
   display: flex;
   gap: 12px;
@@ -353,12 +380,46 @@ section {
   color: var(--card-text);
   border-radius: 10px;
   padding: 18px 20px;
+  transition: box-shadow 0.35s ease,
+              border-color 0.3s ease,
+              background 0.35s ease;
+}
+
+.code-card:hover {
+  box-shadow: 0 20px 50px rgba(120, 100, 220, 0.45);
+  border-color: var(--card-accent-blue);
+}
+
+/* Header wrapper for dots + blue line (same style as stack-card) */
+.code-card-header {
+  margin-bottom: 14px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid rgba(55, 138, 221, 0.35);
+  position: relative;
+}
+
+.code-card-header::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -1px;
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    var(--card-accent-blue) 20%,
+    var(--card-accent-blue) 80%,
+    transparent 100%
+  );
+  opacity: 0.6;
+  pointer-events: none;
 }
 
 .window-dots {
   display: flex;
   gap: 6px;
-  margin-bottom: 12px;
+ 
 }
 
 .dot {
@@ -422,14 +483,14 @@ section {
 }
 
 .who-am-i-photo {
-  flex: 0 0 280px;
+  flex: 0 0 360px;            
   display: flex;
   justify-content: center;
 }
 
 .who-am-i-photo img {
-  width: 280px;
-  height: 340px;
+  width: 360px;                
+  height: 440px;               
   object-fit: cover;
   border-radius: 12px;
   box-shadow: 0 12px 40px rgba(120, 100, 220, 0.3);

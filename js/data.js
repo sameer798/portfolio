@@ -3,11 +3,31 @@
 
 const portfolioData = {
 
-  about: {
+   about: {
     name: "Sameer",
     role: "Software Engineer",
-    tagline1: "I build",
-    tagline2: "reliable software.",
+
+    // 👇 Typing animation config
+    // "I " prefix fix rahega, sirf ye words type/delete honge
+    typingPrefix: "I ",
+    typingWords: [
+      "build reliable software.",
+      "solve complex problems.",
+      "write clean code.",
+      "ship scalable systems."
+    ],
+    typingSpeed: 100,         // ms per letter (type karte waqt)
+    typingDeleteSpeed: 50,    // ms per letter (delete karte waqt)
+    typingHoldTime: 1500,     // ms (complete word kitni der dikhe)
+
+    // 👇 Naam ke color flash ke liye
+    nameColors: [
+      "#5dcaa5",   // green
+      "#ed93b1",   // pink
+      "#378ADD",   // blue
+      "#FAC775"    // yellow
+    ],
+
     bio: [
       "Hey there, I'm Sameer! I'm a Software Engineer passionate about building scalable systems and writing clean, maintainable code.",
       "I love diving deep into problems, learning new tools, and shipping things that actually work in production."
