@@ -47,33 +47,137 @@
   border-radius: 4px;
 }
 
-.tools-grid {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 14px;
-  justify-content: center;
+/* =========================================================
+   Tools — infinite right-to-left marquee
+   ========================================================= */
+
+.tools-marquee {
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px 0;
+  /* Gradient fade edges */
+  mask-image: linear-gradient(
+    to right,
+    transparent 0%,
+    #000 8%,
+    #000 92%,
+    transparent 100%
+  );
+  -webkit-mask-image: linear-gradient(
+    to right,
+    transparent 0%,
+    #000 8%,
+    #000 92%,
+    transparent 100%
+  );
 }
 
+.tools-marquee-track {
+  display: flex;
+  gap: 16px;
+  width: max-content;
+  animation: tools-scroll 30s linear infinite;
+  will-change: transform;
+}
+
+/* Pause animation on hover */
+.tools-marquee:hover .tools-marquee-track {
+  animation-play-state: paused;
+}
+
+@keyframes tools-scroll {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }   /* 50% = half track (tools duplicated) */
+}
+
+/* ---- Chip ---- */
 .tool-chip {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  flex-shrink: 0;
+
+  width: 110px;
+  height: 110px;
+  padding: 12px;
+
   background: var(--bg-card);
   border: 1px solid var(--card-border);
+  border-radius: 14px;
   color: var(--card-text);
-  padding: 14px 22px;
-  border-radius: 10px;
-  font-size: 13px;
-  font-weight: 600;
+
+  transition: transform 0.3s cubic-bezier(0.22, 1, 0.36, 1),
+              box-shadow 0.3s ease,
+              border-color 0.3s ease;
   cursor: default;
-  transition: transform 0.25s ease,
-    box-shadow 0.3s ease,
-    border-color 0.3s ease,
-    color 0.25s ease;
+  user-select: none;
 }
 
 .tool-chip:hover {
-  transform: translateY(-4px) scale(1.05);
-  box-shadow: 0 8px 24px rgba(120, 100, 220, 0.28);
+  transform: translateY(-6px) scale(1.06);
+  box-shadow: 0 12px 30px rgba(93, 202, 165, 0.35);
   border-color: var(--card-accent-green);
-  color: var(--card-accent-green);
+}
+
+/* ---- Logo ---- */
+.tool-logo {
+  width: 42px;
+  height: 42px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.tool-logo img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  /* Ensure dark logos are visible on dark bg */
+  filter: drop-shadow(0 2px 6px rgba(0, 0, 0, 0.3));
+}
+
+/* ---- Name ---- */
+.tool-name {
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.3px;
+  text-align: center;
+  line-height: 1.2;
+  color: var(--card-text);
+}
+
+/* ---- Light mode tweak ---- */
+:root[data-theme="light"] .tool-chip {
+  background: var(--bg-card);
+  /* bg-card stays dark intentionally (matches card style) */
+}
+
+/* ---- Mobile — smaller chips ---- */
+@media (max-width: 480px) {
+  .tool-chip {
+    width: 92px;
+    height: 92px;
+    padding: 10px;
+  }
+
+  .tool-logo {
+    width: 34px;
+    height: 34px;
+  }
+
+  .tool-name {
+    font-size: 11px;
+  }
+
+  .tools-marquee-track {
+    animation-duration: 22s;   /* faster on mobile */
+  }
 }
 
 /* =========================================================

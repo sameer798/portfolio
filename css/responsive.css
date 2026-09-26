@@ -39,6 +39,20 @@
   }
 
 
+    .tools-marquee {
+    padding: 14px 0;
+  }
+
+  .tool-chip {
+    width: 100px;
+    height: 100px;
+  }
+
+  .tool-logo {
+    width: 36px;
+    height: 36px;
+  }
+
  
   /* ---- Contact section — mobile ---- */
 

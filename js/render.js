@@ -191,9 +191,19 @@ function renderSkills() {
       `).join("")}
     </div>
 
-    <h3 class="tools-title">Technologies &amp; Tools</h3>
-    <div class="tools-grid">
-      ${skills.tools.map(tool => `<div class="tool-chip">${tool}</div>`).join("")}
+       <h3 class="tools-title">Technologies &amp; Tools</h3>
+
+    <div class="tools-marquee">
+      <div class="tools-marquee-track">
+        ${[...skills.tools, ...skills.tools].map(tool => `
+          <div class="tool-chip">
+            <div class="tool-logo">
+              <img src="${tool.logo}" alt="${tool.name}" loading="lazy" />
+            </div>
+            <span class="tool-name">${tool.name}</span>
+          </div>
+        `).join("")}
+      </div>
     </div>
   `;
 }

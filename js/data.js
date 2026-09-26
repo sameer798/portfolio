@@ -4,16 +4,18 @@
 const portfolioData = {
 
   about: {
-    name: "Sameer",
+    name: "Sameer Ansari",
     role: "Software Engineer",
 
     // 👇 Typing animation config
     typingPrefix: "I ",
     typingWords: [
-      "build reliable software.",
+      "am software developer",
+      "build scalable systems.",
       "solve complex problems.",
+      "optimize performance",
       "write clean code.",
-      "ship scalable systems."
+    
     ],
     typingSpeed: 100,
     typingDeleteSpeed: 50,
@@ -103,7 +105,25 @@ const portfolioData = {
       { name: "MySQL", percent: 82, color: "#1D9E75" },
       { name: "AWS", percent: 75, color: "#7F77DD" }
     ],
-    tools: ["Git", "Docker", "AWS", "MySQL", "Postman", "Linux"]
+    // tools: ["TypeScript", "Next JS","Node JS","Express JS", "React","Git", "JavaScript", "MySQL", "Linux", "MongoDB",  "HTML", "CSS", "Tailwind","Docker", "Postman"]
+        tools: [
+      { name: "TypeScript",     logo: "assets/logos/typescript-color.svg" },
+      { name: "Next JS",  logo: "assets/logos/nextdotjs-color.svg" },
+      { name: "Node JS",     logo: "assets/logos/nodedotjs-color.svg" },
+      { name: "Express JS",   logo: "assets/logos/express-color.svg" },
+      { name: "React", logo: "assets/logos/react-color.svg" },
+      { name: "Git",   logo: "assets/logos/git-color.svg" },
+      { name: "JavaScript",   logo: "assets/logos/javascript-color.svg" },
+      { name: "MySQL",   logo: "assets/logos/mysql-color.svg" },
+      { name: "Linux",   logo: "assets/logos/linux-color.svg" },
+      { name: "MongoDB",   logo: "assets/logos/mongodb-color.svg" },
+      { name: "HTML",   logo: "assets/logos/html5-color.svg" },
+      { name: "CSS",   logo: "assets/logos/css-color.svg" },
+      { name: "Tailwind",   logo: "assets/logos/tailwindcss-color.svg" },
+      { name: "Docker",   logo: "assets/logos/docker-color.svg" },
+      { name: "Postman",   logo: "assets/logos/postman-color.svg" },
+
+    ]
   },
 
   experience: [
