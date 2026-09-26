@@ -17,6 +17,7 @@ document.addEventListener("DOMContentLoaded", () => {
    setupWhoHeadingColorFlash();
 
      setupAboutBackground();
+      setupCardTilt();
 });
 
 // ---- Light/dark theme toggle (persisted in localStorage) ----
@@ -303,5 +304,55 @@ function setupAboutBackground() {
     targetX = window.innerWidth / 2;
     targetY = window.innerHeight / 2;
     if (!rafId) rafId = requestAnimationFrame(animate);
+  });
+}
+
+
+
+
+// ============================================================
+// 3D tilt + expand effect on the About section code card.
+// Mouse position within the card determines the tilt angles.
+// Smoothly resets when mouse leaves.
+// ============================================================
+function setupCardTilt() {
+  const card = document.querySelector("#about .code-card");
+  if (!card) return;
+
+  // Skip on touch-only devices
+  const hasHover = window.matchMedia("(hover: hover) and (pointer: fine)").matches;
+  if (!hasHover) return;
+
+  const MAX_TILT   = 3;    // 👈 max tilt angle in degrees
+  const SCALE      = 1.05; // 👈 scale on hover
+  const PERSPECTIVE = 600; // 👈 depth (lower = more dramatic)
+
+  // 👇 Apply perspective to the card's parent so tilt works in 3D
+  const parent = card.parentElement;
+  if (parent) parent.style.perspective = PERSPECTIVE + "px";
+
+  card.style.transformStyle = "preserve-3d";
+  card.style.willChange = "transform";
+  card.style.transition = "transform 0.25s ease-out, box-shadow 0.35s ease";
+
+  card.addEventListener("mousemove", (e) => {
+    const rect = card.getBoundingClientRect();
+
+    // Mouse position relative to card (0 → 1)
+    const px = (e.clientX - rect.left) / rect.width;
+    const py = (e.clientY - rect.top)  / rect.height;
+
+    // Calculate tilt
+    // px=0.5 means center, so (px - 0.5) → -0.5 to +0.5
+    const rotateY = (px - 0.5) * MAX_TILT * 2;   // left → negative, right → positive
+    const rotateX = (0.5 - py) * MAX_TILT * 2;   // top → positive, bottom → negative
+
+    card.style.transform = `perspective(${PERSPECTIVE}px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale(${SCALE})`;
+    card.style.boxShadow = "0 25px 60px rgba(120, 100, 220, 0.45)";
+  });
+
+  card.addEventListener("mouseleave", () => {
+    card.style.transform = "perspective(900px) rotateX(0) rotateY(0) scale(1)";
+    card.style.boxShadow = "";   // 👈 back to CSS default
   });
 }
