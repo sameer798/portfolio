@@ -308,6 +308,7 @@ function renderContact() {
         <div class="social-icons">
           ${socialLink("github", contact.socials.github)}
           ${socialLink("linkedin", contact.socials.linkedin)}
+           <a href="https://wa.me/${contact.whatsapp}" target="_blank" rel="noopener" class="social-icon" aria-label="whatsapp">${icons.whatsapp}</a>
         </div>
       </div>
 
@@ -343,12 +344,14 @@ function renderContact() {
 function renderFooter() {
   const footer = document.getElementById("site-footer");
   const year = new Date().getFullYear();
+   const whatsapp = portfolioData.contact.whatsapp;
 
   footer.innerHTML = `
     <p>&copy; ${year} Developer Portfolio by ${portfolioData.about.name}</p>
     <div class="footer-socials">
       ${socialLink("github", portfolioData.about.socials.github)}
       ${socialLink("linkedin", portfolioData.about.socials.linkedin)}
+       <a href="https://wa.me/${whatsapp}" target="_blank" rel="noopener" class="social-icon" aria-label="whatsapp">${icons.whatsapp}</a>
     </div>
   `;
 }

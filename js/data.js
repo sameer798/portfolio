@@ -88,8 +88,8 @@ const portfolioData = {
     ],
     photo: "assets/images/my-photo.png",
     socials: {
-      linkedin: "#",
-      github: "#",
+      linkedin: "https://www.linkedin.com/in/sameer-ansari-45a4a71a0/",
+      github: "https://github.com/sameer798",
       resume: "assets/resume/sameer-ahmed.pdf"
     }
   },
@@ -166,12 +166,12 @@ const portfolioData = {
    contact: {
     heading: "Let's talk",
     // subtitle: "Have a project in mind? Send a message and I'll get back soon.",
-    email: "sameer@gmail.com",
-    location: "City, Country",
+    email: "sameershams.adi@gmail.com",
+    location: "Ahmedabad, India",
     whatsapp: "917737308028",
     socials: {
-      github: "#",
-      linkedin: "#"
+      github: "https://github.com/sameer798",
+      linkedin: "https://www.linkedin.com/in/sameer-ansari-45a4a71a0/"
     }
   }
 
