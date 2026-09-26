@@ -15,6 +15,8 @@ document.addEventListener("DOMContentLoaded", () => {
      setupTypingAnimation();     
   setupNameColorFlash();      
    setupWhoHeadingColorFlash();
+
+     setupAboutBackground();
 });
 
 // ---- Light/dark theme toggle (persisted in localStorage) ----
@@ -204,4 +206,102 @@ function setupWhoHeadingColorFlash() {
     i = (i + 1) % colors.length;
     heading.style.setProperty("--heading-color", colors[i]);
   }, 2500); // every 2.5s (transition 1.2s hai, so smooth)
+}
+
+
+
+
+
+// ============================================================
+// About section background:
+// 1. Injects a code-symbols pattern (fills the whole section)
+// 2. Adds a mouse-follow glow
+// Only active on devices with a real pointer (hover: hover)
+// ============================================================
+function setupAboutBackground() {
+  const aboutSection = document.getElementById("about");
+  if (!aboutSection) return;
+
+  // ---- Inject pattern layer (with content directly) ----
+  if (!aboutSection.querySelector(".about-code-pattern")) {
+    const pattern = document.createElement("div");
+    pattern.className = "about-code-pattern";
+    pattern.setAttribute("aria-hidden", "true");
+
+    // 👇 Repeat content to fill the section area
+    const symbols = "{ } </>  const  ( )  =>  []  div  ;  React  Node  AWS  return  ==  {}  </>  MySQL  Python  &&  div  ;  ( )  fn  {}  </>  const  =  Docker  {}  </>  JavaScript  ( )  ;  React  =  {}  </>  Node  AWS  ;  const  ( )  =>  []  MySQL  div  ;  {}  </>  Python  return  ==  {}  </>  JavaScript  const  ( )  =>  React  Node  Docker  ;  {}  </>  AWS  MySQL  fn  ;  ( )  div  {}  </>  const  ==  Python  {}  </>  JavaScript  React  ( )  ;  Node  =>  AWS  []  MySQL  div  ;  {}  </>  const  ( )  {}  </>  return  React  JavaScript  Node  ;";
+    // Repeat 8 times to ensure it fills any section height
+    pattern.textContent = Array(8).fill(symbols).join("\n");
+
+    aboutSection.appendChild(pattern);
+  }
+
+  // ---- Inject glow layer ----
+  if (!aboutSection.querySelector(".about-glow")) {
+    const glow = document.createElement("div");
+    glow.className = "about-glow";
+    glow.setAttribute("aria-hidden", "true");
+    aboutSection.appendChild(glow);
+  }
+
+    const glowEl = aboutSection.querySelector(".about-glow");
+  const patternEl = aboutSection.querySelector(".about-code-pattern");
+
+  // ---- Skip glow on touch-only devices ----
+  const hasHover = window.matchMedia("(hover: hover) and (pointer: fine)").matches;
+  if (!hasHover) {
+    glowEl.style.display = "none";
+    return;
+  }
+
+  // ---- Mouse tracking + parallax on pattern ----
+  const PARALLAX_STRENGTH = 50;   // 👈 pattern kitna move kare (px) — 8 = subtle, 20 = strong
+
+  let targetX = 0, targetY = 0;
+  let currentX = 0, currentY = 0;
+  let rafId = null;
+
+  function animate() {
+    // Smooth interpolation (lerp) — pattern slowly follows
+    currentX += (targetX - currentX) * 0.16;
+    currentY += (targetY - currentY) * 0.16;
+
+    // Pattern shift (parallax)
+    const shiftX = (currentX - window.innerWidth / 2) / window.innerWidth * PARALLAX_STRENGTH;
+    const shiftY = (currentY - window.innerHeight / 2) / window.innerHeight * PARALLAX_STRENGTH;
+
+    patternEl.style.transform = `translate(${shiftX}px, ${shiftY}px)`;
+
+    if (Math.abs(targetX - currentX) > 0.3 || Math.abs(targetY - currentY) > 0.3) {
+      rafId = requestAnimationFrame(animate);
+    } else {
+      rafId = null;
+    }
+  }
+
+  aboutSection.addEventListener("mousemove", (e) => {
+    const rect = aboutSection.getBoundingClientRect();
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
+
+    // Glow follows instantly
+    glowEl.style.left = x + "px";
+    glowEl.style.top  = y + "px";
+    glowEl.style.opacity = "1";
+
+    // Pattern ko target position do (smooth follow)
+    targetX = e.clientX;
+    targetY = e.clientY;
+
+    if (!rafId) rafId = requestAnimationFrame(animate);
+  });
+
+  aboutSection.addEventListener("mouseleave", () => {
+    glowEl.style.opacity = "0";
+
+    // Pattern ko wapas center pe le jao
+    targetX = window.innerWidth / 2;
+    targetY = window.innerHeight / 2;
+    if (!rafId) rafId = requestAnimationFrame(animate);
+  });
 }

@@ -61,7 +61,8 @@ body {
   background: var(--bg-dark);
   color: var(--text-main);
   line-height: 1.6;
-  padding-top: 68px;   /* 👈 navbar ki height ke barabar */
+  padding-top: 68px;
+  /* 👈 navbar ki height ke barabar */
   transition: background-color 0.4s ease, color 0.4s ease;
 }
 
@@ -115,10 +116,11 @@ section {
   z-index: 100;
   background: var(--bg-dark);
   border-bottom: 1px solid var(--border-color);
-  padding: 16px 0;                          /* 👈 horizontal padding hata di */
+  padding: 16px 0;
+  /* 👈 horizontal padding hata di */
   transition: background-color 0.4s ease,
-              border-color 0.4s ease,
-              box-shadow 0.3s ease;
+    border-color 0.4s ease,
+    box-shadow 0.3s ease;
 }
 
 #navbar.scrolled {
@@ -127,12 +129,15 @@ section {
 
 /* Navbar ke andar ka content centered container mein */
 .navbar-inner {
-  max-width: 1400px;                         /* 👈 sections ke saath match */
+  max-width: 1400px;
+  /* 👈 sections ke saath match */
   margin: 0 auto;
-  padding: 0 4%;                             /* 👈 yahan padding lagayi */
+  padding: 0 4%;
+  /* 👈 yahan padding lagayi */
   display: flex;
   align-items: center;
-  justify-content: space-between;            /* 👈 logo/list left, toggle right */
+  justify-content: space-between;
+  /* 👈 logo/list left, toggle right */
 }
 
 
@@ -206,8 +211,8 @@ section {
   color: var(--card-text);
   flex-shrink: 0;
   transition: transform 0.3s ease,
-              box-shadow 0.3s ease,
-              background 0.3s ease;
+    box-shadow 0.3s ease,
+    background 0.3s ease;
 }
 
 .theme-toggle:hover {
@@ -241,7 +246,14 @@ section {
 
 /* ===== About section ===== */
 #about {
-  background: linear-gradient(135deg, var(--bg-gradient-start), var(--bg-gradient-end));
+  background: var(--bg-dark);
+  position: relative;
+  overflow: hidden;
+  padding: 80px 4%;
+  max-width: 1400px;
+  margin: 0 auto;
+  /* 👇 z-index stacking context */
+  isolation: isolate;
 }
 
 /* 👇 Sub-section A: Hero text + Code card */
@@ -250,7 +262,7 @@ section {
   gap: 50px;
   flex-wrap: wrap;
   align-items: center;
-  margin-bottom: 80px;       
+  margin-bottom: 80px;
 }
 
 .about-text {
@@ -260,14 +272,14 @@ section {
 
 .hey-there,
 .hero-line {
-  font-size: 42px;       
-  font-weight: 700;         
-  line-height: 1.25;        
-  letter-spacing: -0.5px;   
+  font-size: 42px;
+  font-weight: 700;
+  line-height: 1.25;
+  letter-spacing: -0.5px;
 }
 
 .hey-there {
-  font-weight: 600;         
+  font-weight: 600;
   margin-bottom: 4px;
 }
 
@@ -282,7 +294,8 @@ section {
 /* 👇 Naam ka color smooth fade (JS changes CSS variable) */
 .name-flash {
   color: var(--name-color, var(--accent-green));
-  transition: color 1.2s ease;   /* 👈 smooth 1.2s fade */
+  transition: color 1.2s ease;
+  /* 👈 smooth 1.2s fade */
 }
 
 /* 👇 Typing cursor blink */
@@ -295,8 +308,15 @@ section {
 }
 
 @keyframes blink {
-  0%, 100% { opacity: 1; }
-  50% { opacity: 0; }
+
+  0%,
+  100% {
+    opacity: 1;
+  }
+
+  50% {
+    opacity: 0;
+  }
 }
 
 /* 👇 Typing word — jaisa type ho raha hai */
@@ -394,8 +414,8 @@ section {
   border-radius: 10px;
   padding: 18px 20px;
   transition: box-shadow 0.35s ease,
-              border-color 0.3s ease,
-              background 0.35s ease;
+    border-color 0.3s ease,
+    background 0.35s ease;
 }
 
 .code-card:hover {
@@ -418,13 +438,11 @@ section {
   right: 0;
   bottom: -1px;
   height: 1px;
-  background: linear-gradient(
-    90deg,
-    transparent 0%,
-    var(--card-accent-blue) 20%,
-    var(--card-accent-blue) 80%,
-    transparent 100%
-  );
+  background: linear-gradient(90deg,
+      transparent 0%,
+      var(--card-accent-blue) 20%,
+      var(--card-accent-blue) 80%,
+      transparent 100%);
   opacity: 0.6;
   pointer-events: none;
 }
@@ -432,7 +450,7 @@ section {
 .window-dots {
   display: flex;
   gap: 6px;
- 
+
 }
 
 .dot {
@@ -454,11 +472,16 @@ section {
 }
 
 .code-block {
-  font-family: 'Consolas', 'Monaco', 'Courier New', monospace;  /* 👈 better fonts */
-  font-size: 13.5px;         /* 👈 13 → 13.5 */
-  font-weight: 500;          /* 👈 THODA BOLD */
-  line-height: 1.85;         /* 👈 breathing room */
-  color: var(--card-text);   /* 👈 muted → main (brighter) */
+  font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
+  /* 👈 better fonts */
+  font-size: 13.5px;
+  /* 👈 13 → 13.5 */
+  font-weight: 500;
+  /* 👈 THODA BOLD */
+  line-height: 1.85;
+  /* 👈 breathing room */
+  color: var(--card-text);
+  /* 👈 muted → main (brighter) */
   white-space: pre-wrap;
   word-break: break-word;
   letter-spacing: 0.2px;
@@ -498,12 +521,13 @@ section {
   justify-content: space-between;
   flex-wrap: wrap;
   padding-top: 40px;
-  border-top: 1px solid var(--border-color);  /* 👈 subtle separator */
+  border-top: 1px solid var(--border-color);
+  /* 👈 subtle separator */
   margin-top: 20px;
 }
 
 .who-am-i-text {
-  flex: 1 1 480px;  
+  flex: 1 1 480px;
   min-width: 280px;
 }
 
@@ -517,8 +541,8 @@ section {
   width: 380px;
   height: 470px;
   object-fit: cover;
-  border-radius: 10px;                         
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3); 
+  border-radius: 10px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
   border: 1px solid var(--card-border);
   transition: transform 0.4s ease, box-shadow 0.4s ease;
 }
@@ -533,10 +557,13 @@ section {
   color: var(--heading-color, var(--accent-green));
   margin-bottom: 20px;
   font-size: 22px;
-  font-weight: 800;              /* 👈 BOLD */
-  letter-spacing: 2px;           /* 👈 UPPERCASE ke liye letter-spacing */
+  font-weight: 800;
+  /* 👈 BOLD */
+  letter-spacing: 2px;
+  /* 👈 UPPERCASE ke liye letter-spacing */
   text-transform: uppercase;
-  transition: color 1.2s ease;   /* 👈 smooth fade */
+  transition: color 1.2s ease;
+  /* 👈 smooth fade */
 }
 
 /* Optional: heading ke neeche chhoti underline */
@@ -554,12 +581,16 @@ section {
 .who-am-i p,
 .who-am-i-text p {
   margin-bottom: 18px;
-  color: var(--text-main);     /* 👈 muted → main (dark, readable) */
-  font-size: 15.5px;           /* 👈 14 → 15.5 */
-  line-height: 1.75;           /* 👈 breathing room */
+  color: var(--text-main);
+  /* 👈 muted → main (dark, readable) */
+  font-size: 15.5px;
+  /* 👈 14 → 15.5 */
+  line-height: 1.75;
+  /* 👈 breathing room */
   max-width: 640px;
   font-weight: 400;
-  opacity: 0.9;                /* 👈 thoda soft, but readable */
+  opacity: 0.9;
+  /* 👈 thoda soft, but readable */
 }
 
 /* ===== Section titles ===== */
@@ -572,7 +603,8 @@ section {
 .section-title-wrap {
   position: sticky;
   top: 90px;
-  z-index: 5;              /* 👈 cards (z-index: 20) se NEECHE */
+  z-index: 5;
+  /* 👈 cards (z-index: 20) se NEECHE */
   margin-bottom: 40px;
 }
 
@@ -580,10 +612,12 @@ section {
   display: flex;
   align-items: center;
   gap: 18px;
-  max-width: 100%;         /* 👈 FULL page width (matlab section ki poori width) */
+  max-width: 100%;
+  /* 👈 FULL page width (matlab section ki poori width) */
   margin: 0;
   text-align: left;
-  pointer-events: none;    /* text pe hi click ho, wrapper pe nahi */
+  pointer-events: none;
+  /* text pe hi click ho, wrapper pe nahi */
 }
 
 .section-title.boxed .boxed-text {
@@ -596,7 +630,8 @@ section {
   white-space: nowrap;
   pointer-events: auto;
   position: relative;
-  z-index: 2;              /* boxed-text apne wrapper ke andar upar */
+  z-index: 2;
+  /* boxed-text apne wrapper ke andar upar */
 }
 
 /* Line ko transparent rakho taaki cards ke peeche se visible ho */
@@ -759,4 +794,82 @@ section {
 .footer-socials {
   display: flex;
   gap: 10px;
+}
+
+
+
+
+
+
+
+/* =========================================================
+   About section — background layers
+   (code pattern + mouse-follow glow)
+   ========================================================= */
+
+/* ---- Code-symbols pattern (background text) ---- */
+.about-code-pattern {
+  position: absolute;
+  inset: 0;                              /* 👈 section ki poori height/width */
+  pointer-events: none;
+  z-index: 0;
+  overflow: hidden;                      /* 👈 content clip ho jaye */
+  user-select: none;
+  /* 👇 Text styling */
+  font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
+  font-size: 22px;
+  font-weight: 700;
+  line-height: 3.5;
+  letter-spacing: 8px;
+  word-spacing: 16px;
+  color: rgba(93, 202, 165, 0.10);       /* 👈 thoda zyada visible */
+  /* 👇 Content direct text ke through dikhega (JS se set hoga) */
+  padding: 40px;
+  white-space: pre-wrap;
+  word-break: break-word;
+
+   will-change: transform;
+  transition: transform 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+:root[data-theme="light"] .about-code-pattern {
+  color: rgba(31, 143, 109, 0.10);       /* 👈 light mode mein darker green */
+}
+
+/* ---- Mouse-follow glow ---- */
+.about-glow {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 500px;                          /* 👈 450 → 500 (thoda bada) */
+  height: 500px;
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 0;
+  transform: translate(-50%, -50%);
+  background: radial-gradient(
+    circle,
+    rgba(93, 202, 165, 0.45) 0%,         /* 👈 0.25 → 0.45 (zyada visible) */
+    rgba(93, 202, 165, 0.15) 35%,
+    transparent 70%
+  );
+  opacity: 0;
+  transition: opacity 0.35s ease;
+  will-change: left, top;
+}
+
+:root[data-theme="light"] .about-glow {
+  background: radial-gradient(
+    circle,
+    rgba(31, 143, 109, 0.50) 0%,         /* 👈 light mode mein stronger */
+    rgba(31, 143, 109, 0.18) 35%,
+    transparent 70%
+  );
+}
+
+/* ---- Content ko upar rakho ---- */
+#about > .about-hero,
+#about > .about-who {
+  position: relative;
+  z-index: 1;
 }
