@@ -79,17 +79,34 @@ function setupActiveNavHighlight() {
   if (sections.length) setActive(sections[0].id);
 }
 
-// ---- Contact form (no backend yet - shows a local confirmation message) ----
+
+// ---- Contact form → opens WhatsApp with a pre-filled message ----
 function setupContactForm() {
   const form = document.getElementById("contact-form");
   const status = document.getElementById("form-status");
 
+  // 👇 Apna WhatsApp number yahan daalo (country code ke saath, no +, no spaces)
+  const WHATSAPP_NUMBER = "917737308028";
+
   form.addEventListener("submit", (e) => {
     e.preventDefault();
 
-    // TODO: replace with a real submit (e.g. an API call or a form service)
-    // once you wire up a backend or a service like Formspree.
-    status.textContent = "Thanks! Your message has been noted.";
+    const name    = form.name.value.trim();
+    const subject = form.subject.value.trim();
+    const message = form.message.value.trim();
+
+    // Build pre-filled WhatsApp message
+    const text = `Hi, my name is ${name}.\n\nSubject: ${subject}\n\nMessage: ${message}`;
+    const encodedText = encodeURIComponent(text);
+
+    // wa.me link — WhatsApp smart fallback (app → web → download)
+    const whatsappUrl = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodedText}`;
+
+    // Open WhatsApp in new tab/window
+    window.open(whatsappUrl, "_blank");
+
+    // Show confirmation
+    status.textContent = "Opening WhatsApp...";
     status.classList.add("show");
     form.reset();
 

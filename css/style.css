@@ -392,14 +392,50 @@ section {
   filter: brightness(1.08);
 }
 
+
+
+/* WhatsApp button (About section) */
+.btn-whatsapp {
+  background: #25D366;               /* 👈 WhatsApp brand green */
+  color: #fff;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.btn-whatsapp:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 20px rgba(37, 211, 102, 0.5);
+  filter: brightness(1.08);
+}
+
+.btn-whatsapp:active {
+  transform: translateY(-1px);
+}
+
+.btn-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 16px;
+  height: 16px;
+}
+
+.btn-icon svg {
+  width: 16px;
+  height: 16px;
+}
+
+
+
 .btn-secondary {
-  background: #1D9E75;
+   background: var(--accent-blue); 
   color: #fff;
 }
 
 .btn-secondary:hover {
   transform: translateY(-3px);
-  box-shadow: 0 8px 20px rgba(29, 158, 117, 0.45);
+   box-shadow: 0 8px 20px rgba(55, 138, 221, 0.45);
   filter: brightness(1.08);
 }
 
@@ -561,13 +597,13 @@ section {
 .who-heading {
   color: var(--heading-color, var(--accent-green));
   margin-bottom: 20px;
-  font-size: 22px;
-  font-weight: 800;
+  font-size: 20px;
+  font-weight: 700;
   /* 👈 BOLD */
-  letter-spacing: 2px;
+  letter-spacing: 1px;
   /* 👈 UPPERCASE ke liye letter-spacing */
   text-transform: uppercase;
-  transition: color 1.2s ease;
+  transition: color 0.3s ease;
   /* 👈 smooth fade */
 }
 
@@ -587,15 +623,17 @@ section {
 .who-am-i-text p {
   margin-bottom: 18px;
   color: var(--text-main);
+    
   /* 👈 muted → main (dark, readable) */
-  font-size: 15.5px;
+  font-size: 20px;
   /* 👈 14 → 15.5 */
-  line-height: 1.75;
+  line-height: 1.5;
   /* 👈 breathing room */
   max-width: 640px;
-  font-weight: 400;
-  opacity: 0.9;
-  /* 👈 thoda soft, but readable */
+  font-weight: 500;
+  opacity: 1;
+   text-align: justify;          
+  text-justify: inter-word;
 }
 
 /* ===== Section titles ===== */
@@ -723,64 +761,228 @@ section {
   border-radius: 6px;
 }
 
-/* ===== Contact ===== */
-.contact-wrapper {
-  display: flex;
-  gap: 40px;
-  flex-wrap: wrap;
+
+/* ===== Contact Section ===== */
+.contact-layout {
+  display: grid;
+  grid-template-columns: 1fr 1.1fr;
+  gap: 60px;
+  align-items: start;
+  max-width: 1100px;
+  margin: 0 auto;
 }
 
+/* ---- LEFT: Info side ---- */
+.contact-info {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.contact-heading {
+  font-size: 40px;
+  font-weight: 800;
+  color: var(--text-main);
+  letter-spacing: -0.5px;
+  line-height: 1.15;
+  margin: 0;
+}
+
+.contact-subtitle {
+  font-size: 15.5px;
+  color: var(--text-muted);
+  line-height: 1.7;
+  max-width: 420px;
+  margin: 0;
+}
+
+.contact-details {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  margin-top: 8px;
+}
+
+.contact-item {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  color: var(--text-main);
+  font-size: 15px;
+  text-decoration: none;
+  transition: color 0.25s ease;
+}
+
+.contact-item:hover {
+  color: var(--accent-green);
+}
+
+.contact-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: rgba(93, 202, 165, 0.12);
+  color: var(--accent-green);
+  flex-shrink: 0;
+}
+
+.contact-icon svg {
+  width: 20px;
+  height: 20px;
+}
+
+/* Circle-style social icons */
+.contact-info .social-icons {
+  margin-top: 12px;
+  gap: 14px;
+}
+
+.contact-info .social-icon {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;              /* 👈 circle */
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid var(--card-border);
+}
+
+.contact-info .social-icon:hover {
+  background: var(--accent-green);
+  color: #fff;
+  border-color: var(--accent-green);
+  transform: translateY(-3px) scale(1.08);
+  box-shadow: 0 8px 22px rgba(93, 202, 165, 0.4);
+}
+
+.contact-info .social-icon svg {
+  width: 20px;
+  height: 20px;
+}
+
+/* ---- RIGHT: Form ---- */
 .contact-form {
-  flex: 1;
-  min-width: 280px;
   background: var(--bg-card);
   border: 1px solid var(--card-border);
   color: var(--card-text);
-  padding: 24px;
-  border-radius: 10px;
+  padding: 32px;
+  border-radius: 16px;
   display: flex;
   flex-direction: column;
-  gap: 6px;
+  gap: 20px;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.25);
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
 }
 
 .contact-form label {
-  font-size: 13px;
-  margin-top: 10px;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--card-text);
+  letter-spacing: 0.3px;
+  margin: 0;
 }
 
 .contact-form input,
 .contact-form textarea {
-  padding: 10px 12px;
-  border-radius: 6px;
+  padding: 14px 16px;
+  border-radius: 10px;
   border: 1px solid var(--card-border);
-  background: var(--input-bg);
-  color: var(--input-text);
+  background: rgba(255, 255, 255, 0.04);
+  color: var(--card-text);
+  font-size: 14.5px;
+  font-family: inherit;
+  transition: border-color 0.25s ease,
+              background 0.25s ease,
+              box-shadow 0.25s ease;
+  outline: none;
 }
 
-.contact-form button {
-  margin-top: 16px;
-  align-self: flex-start;
+.contact-form input::placeholder,
+.contact-form textarea::placeholder {
+  color: rgba(255, 255, 255, 0.35);
+}
+
+.contact-form input:focus,
+.contact-form textarea:focus {
+  border-color: var(--accent-green);
+  background: rgba(93, 202, 165, 0.05);
+  box-shadow: 0 0 0 3px rgba(93, 202, 165, 0.15);
+}
+
+.contact-form textarea {
+  min-height: 120px;
+  resize: vertical;
+  font-family: inherit;
+}
+
+/* WhatsApp button */
+.contact-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 14px 24px;
+  background: #25D366;               /* 👈 WhatsApp brand green */
+  color: #fff;
+  border: none;
+  border-radius: 10px;
+  font-size: 15px;
+  font-weight: 700;
+  letter-spacing: 0.3px;
+  cursor: pointer;
+  margin-top: 6px;
+  transition: transform 0.25s ease,
+              box-shadow 0.3s ease,
+              filter 0.25s ease;
+}
+
+.contact-btn:hover {
+  transform: translateY(-2px);
+  filter: brightness(1.08);
+  box-shadow: 0 10px 28px rgba(37, 211, 102, 0.45);
+}
+
+.contact-btn:active {
+  transform: translateY(0);
+}
+
+.contact-btn-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.contact-btn-icon svg {
+  width: 20px;
+  height: 20px;
 }
 
 .form-status {
   font-size: 13px;
-  color: var(--card-accent-green);
+  color: #25D366;
   opacity: 0;
   transition: opacity 0.3s;
+  margin: 0;
 }
 
 .form-status.show {
   opacity: 1;
 }
 
-.contact-info {
-  flex: 1;
-  min-width: 240px;
+/* Light mode adjustments */
+:root[data-theme="light"] .contact-info .social-icon {
+  background: rgba(0, 0, 0, 0.04);
 }
 
-.contact-info p {
-  margin-bottom: 14px;
-  color: var(--accent-green);
+:root[data-theme="light"] .contact-form input::placeholder,
+:root[data-theme="light"] .contact-form textarea::placeholder {
+  color: rgba(0, 0, 0, 0.35);
 }
 
 /* ===== Footer ===== */

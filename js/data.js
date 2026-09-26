@@ -163,9 +163,12 @@ const portfolioData = {
     }
   ],
 
-  contact: {
+   contact: {
+    heading: "Let's talk",
+    // subtitle: "Have a project in mind? Send a message and I'll get back soon.",
     email: "sameer@gmail.com",
     location: "City, Country",
+    whatsapp: "917737308028",
     socials: {
       github: "#",
       linkedin: "#"

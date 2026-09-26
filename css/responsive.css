@@ -38,6 +38,87 @@
     justify-content: space-between;
   }
 
+
+ 
+  /* ---- Contact section — mobile ---- */
+
+    #contact {
+    padding-left: 5%;          /* 👈 section ka side padding */
+    padding-right: 5%;
+  }
+
+  .contact-layout {
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+
+     gap: 32px;
+    padding: 0;              
+    max-width: 100%;          
+    width: 100%; 
+  }
+
+  /* Form pehle? Nahi — heading pehle, fir form, fir info */
+  .contact-info {
+    display: contents;    
+  
+    width: 100%;    
+   }
+
+  .contact-heading {
+    order: 1;
+    font-size: 28px;       
+    text-align: left;
+    margin-bottom: 0;
+     width: 100%; 
+  }
+
+  /* .contact-subtitle {
+    order: 2;
+    font-size: 14.5px;
+    margin-bottom: 8px;
+  } */
+
+  .contact-form {
+    order: 3;
+    padding: 24px;
+    gap: 16px;
+
+     width: 100%;             
+    max-width: 100%;          
+    box-sizing: border-box;  
+  }
+
+  .contact-details {
+    order: 4;
+    gap: 12px;
+     width: 100%; 
+  }
+
+  .contact-info .social-icons {
+    order: 5;
+     width: 100%;  
+  }
+
+  /* ---- Small text / padding tweaks ---- */
+  .contact-form input,
+  .contact-form textarea {
+    padding: 12px 14px;
+    font-size: 14px;
+  }
+
+  .contact-btn {
+    padding: 13px 20px;
+    font-size: 14.5px;
+  }
+
+  .contact-btn-icon svg {
+    width: 18px;
+    height: 18px;
+  }
+
+
+
   .hamburger {
     display: flex;
   }
