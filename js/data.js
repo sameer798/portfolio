@@ -90,7 +90,7 @@ const portfolioData = {
     socials: {
       linkedin: "#",
       github: "#",
-      resume: "assets/resume/resume.pdf"
+      resume: "assets/resume/sameer-ahmed.pdf"
     }
   },
 

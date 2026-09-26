@@ -247,7 +247,7 @@ function setupAboutBackground() {
     pattern.setAttribute("aria-hidden", "true");
 
     // 👇 Repeat content to fill the section area
-    const symbols = "{ } </>  const  ( )  =>  []  div  ;  React  Node  AWS  return  ==  {}  </>  MySQL  Python  &&  div  ;  ( )  fn  {}  </>  const  =  Docker  {}  </>  JavaScript  ( )  ;  React  =  {}  </>  Node  AWS  ;  const  ( )  =>  []  MySQL  div  ;  {}  </>  Python  return  ==  {}  </>  JavaScript  const  ( )  =>  React  Node  Docker  ;  {}  </>  AWS  MySQL  fn  ;  ( )  div  {}  </>  const  ==  Python  {}  </>  JavaScript  React  ( )  ;  Node  =>  AWS  []  MySQL  div  ;  {}  </>  const  ( )  {}  </>  return  React  JavaScript  Node  ;";
+    const symbols = "{ } </>  Next.js  ( )  =>  []  div  ;  React  Node  GIT  return  ==  {}  </>  MySQL  TypeScript  &&  Next.js  ;  ( )  Software Development  {}  </>  Redux  =  Docker  {}  </>  JavaScript  ( )  ;  React  =  {}  </>  Node  Full_stack  ;  const  ( )  =>  []  MERN_STACK  div  ;  {}  </>  TypeScript  </>  ==  {}  </>  TypeScript  const  ( )  =>  React  Node  Docker  ;  {}  </>  AWS  MySQL  fn  ;  ( )  div  {}  </>  const  ==  Python  {}  </>  JavaScript  React  ( )  ;  Node  =>  AWS  []  MySQL  div  ;  {}  </>  const  ( )  {}  </>  return  React  JavaScript  Node  ;";
     // Repeat 8 times to ensure it fills any section height
     pattern.textContent = Array(8).fill(symbols).join("\n");
 
